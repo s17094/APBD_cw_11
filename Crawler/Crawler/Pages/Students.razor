@@ -1,0 +1,43 @@
+﻿@page "/students"
+
+<h3>Students</h3>
+
+<table class="table table-bordered">
+    @if (_students.Count == 0)
+    {
+        <tr>
+            <td>
+                <img src="Loading_icon.gif" alt="loading"/>
+            </td>
+        </tr>
+    }
+    else
+    {
+        <thead>
+        <tr>
+            <th scope="col">
+                Avatar
+            </th>
+            <th class="hoverable" scope="col" @onclick="@(SortByFirstName)">
+                First Name
+            </th>
+            <th class="hoverable" scope="col" @onclick="@(SortByLastName)">
+                Last Name
+            </th>
+            <th class="hoverable" scope="col" @onclick="@(SortByBirthdate)">
+                Birthdate
+            </th>
+            <th class="hoverable" scope="col" @onclick="@(SortByStudies)">
+                Studies
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var s in _students)
+            {
+                <ShowStudent Student="s" OnDeleteClicked="DeleteStudent" />
+            }
+        </tbody>
+
+    }
+</table>

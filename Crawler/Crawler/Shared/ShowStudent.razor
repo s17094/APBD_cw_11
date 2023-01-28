@@ -1,0 +1,50 @@
+﻿@using Crawler.Models
+@inject IJSRuntime js
+@inject NavigationManager navigationManager
+
+<tr>
+    <th class="hoverable" scope="row" @onclick="@(OnClickShowStudentDetails)">
+        <img src="@Student.Avatar" alt="avatar" width="100" height="100" />
+    </th>
+    <th>
+        @Student.FirstName
+    </th>
+    <th>
+        @Student.LastName
+    </th>
+    <th>
+        @Student.Birthdate.ToString("MM/dd/yyyy")
+    </th>
+    <th>
+        @Student.Studies
+    </th>
+    <th>
+        <button @onclick="@(DeleteConfirm)">
+            <img src="deleteButton.png" alt="delete" width="100" height="100" />
+        </button>
+    </th>
+</tr>
+
+@code {
+
+    [Parameter]
+    public Student Student { get; set; }
+
+    [Parameter]
+    public EventCallback<Student> OnDeleteClicked { get; set; }
+
+    private async void DeleteConfirm()
+    {
+        var confirmed = await js.InvokeAsync<bool>("confirm", "Are you sure?");
+        if (confirmed)
+        {
+            OnDeleteClicked.InvokeAsync(Student);
+        }
+    }
+
+    private void OnClickShowStudentDetails()
+    {
+        navigationManager.NavigateTo("/student/" + Student.Id);
+    }
+
+}

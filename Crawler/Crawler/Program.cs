@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using Crawler.Data;
+using Crawler.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<IStudentService, StudentService>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

@@ -1,0 +1,11 @@
+div,
+span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+h3,
+.row {
+  margin-bottom: 25px;
+}
